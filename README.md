@@ -1,2 +1,1 @@
-# PMPT
-client-server web application for school
+# client-server web application for school
