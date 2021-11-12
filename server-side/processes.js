@@ -7,7 +7,7 @@ const initGame = (sio, socket) => {
 	io = sio;
 	gameSocket = socket;
 	activeSession.push(gameSocket);
-	gameSocket.on('Disconnect', handleDisconnect);
+	gameSocket.on('disconnect', handleDisconnect);
 	gameSocket.on('createNewGame', handleCreateSession);
 }
 
