@@ -18,7 +18,12 @@ class createNewGame extends React.Component {
             <>
                 {
                     <div>
-                        <button className="btn btn-primary" onClick={ this.send() }>Send</button>
+                        <button
+                            className="btn btn-primary"
+                            onClick={this.send()}
+                        >
+                            Send
+                        </button>
                     </div>
                 }
             </>
