@@ -2,7 +2,6 @@ import React from "react";
 import { Redirect } from "react-router";
 // import { v4 } from "uuid";
 import uuid from uuid/v4;
-
 const socket = require("../connection/socket").socket;
 
 class CreateNewGame extends React.Component {
