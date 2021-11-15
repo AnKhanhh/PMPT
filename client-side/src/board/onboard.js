@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router";
 // import { v4 } from "uuid";
-import uuid from uuid/v4;
+import uuid from 'uuid/v4';
 const socket = require("../connection/socket").socket;
 
 class CreateNewGame extends React.Component {
@@ -46,7 +46,7 @@ class CreateNewGame extends React.Component {
 						className="btn btn-primary"
 						// when press submit, send request to server with uuid generated as room id
 						onClick={ () => {
-							this.props.didRedirect()
+							// this.props.didRedirect()
 							this.props.setUserName(this.state.inputName)
 							this.setState({
 								getName: true
