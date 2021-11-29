@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Onboard from './board/onboard';
 
 function App() {
+
+	const [didRedirect, setDidredirect] = React.useState(false)
+
 	const [userName, setUserName] = React.useState('');
 
   return (
@@ -12,6 +15,9 @@ function App() {
 		<Switch>
 			<Route exact path='/'>
 				<Onboard setUserName={setUserName} />
+			</Route>
+			<Route exact path='/game/:gameid'>
+				<></>
 			</Route>
 		</Switch>
 	</Router>

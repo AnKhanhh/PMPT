@@ -16,8 +16,9 @@ function handleDisconnect() {
 	activeSession.splice(i, 1);
 }
 function handleCreateSession(gameId) {
-// send room id and socket id back to client, for later uses
+// emit room id and socket id back to client
 	this.emit('createNewGame', {gameId: gameId, mySocketId: this.id});
 	this.join(gameId);
 }
+
 exports.initGame = initGame;

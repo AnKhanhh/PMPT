@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router";
 // import { v4 } from "uuid";
 import uuid from 'uuid/v4';
+import { ColorContext } from "../context/colorcontext";
 const socket = require("../connection/socket").socket;
 
 class CreateNewGame extends React.Component {
@@ -14,7 +15,7 @@ class CreateNewGame extends React.Component {
         super(props);
         this.textInput = React.createRef();
     }
-    // create unique room id and send it to server
+    // generate unique room id and send it to server to create new room
     send = () => {
         const newRoomId = uuid();
         this.setState({
@@ -53,17 +54,17 @@ class CreateNewGame extends React.Component {
 							})
 							this.send()
 						}}
-					>
-						Submit
-					</button>
+					>Submit</button>
 				</div>
 			}
 		</>);
     }
 }
 
-// export an instance of CreateNewGame, intended for later uses
+// export to App.js
 const Onboard = (props) => {
-	return <CreateNewGame setUserName={props.setUserName} />
+	const color = React.useContext(ColorContext)
+
+	return <CreateNewGame didRedirect={color.playerDidRedirect} setUserName={props.setUserName} />
 }
 export default Onboard;
