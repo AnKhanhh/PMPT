@@ -1,5 +1,5 @@
 import React from 'react';
-import {userParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 
 const socket = require('../connection.socket').socket
 
@@ -12,7 +12,7 @@ const JoinRoom = (id, username, creator) => {
 	socket.emit("playerJoinGame", idData)
 }
 
-const (JoinGame) = (props) => {
+const JoinGame = (props) => {
 	const {id} = useParams()
 	JoinRoom(id, props.username, props.creator)
 	return <>
