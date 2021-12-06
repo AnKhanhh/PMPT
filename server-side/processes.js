@@ -21,7 +21,6 @@ function handleCreateSession(gameId) {
 	this.emit('createNewGame', {gameId: gameId, mySocketId: this.id});
 	this.join(gameId);
 }
-
 function handleJoinGame(idData) {
 	let playerSocket = this
 	let room = io.sockets.adapter.rooms[idData.gameId]
