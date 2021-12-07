@@ -8,8 +8,8 @@ import chessMove from '../assets/moveSoundEffect.mp3'
 import Piece from './piece'
 import piecemap from './piecemap'
 import { useParams } from 'react-router-dom'
-import { ColorContext } from '../../context/colorcontext' 
-const socket  = require('../../connection/socket').socket
+import { ColorContext } from '../context/colorcontext' 
+const socket  = require('../connection/socket').socket
 
 
 class ChessGame extends React.Component {
@@ -286,7 +286,7 @@ const ChessGameWrapper = (props) => {
         socket.on('give userName', (socketId) => {
             if (socket.id !== socketId) {
                 console.log("give userName stage: " + props.myUserName)
-                socket.emit('recieved userName', {userName: props.myUserName, gameId: gameid})
+                socket.emit('received userName', {userName: props.myUserName, gameId: gameid})
             }
         })
     
