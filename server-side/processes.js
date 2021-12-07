@@ -10,17 +10,22 @@ const initGame = (sio, socket) => {
 	gameSocket.on('disconnect', handleDisconnect);
 	gameSocket.on('createNewGame', handleCreateSession);
 	gameSocket.on('playerJoinGame', handleJoinGame)
+	gameSocket.on('new move', handleMove)
+	gameSocket.on('request username', handleRequest)
+	gameSocket.on('received username', handleReceived)
 }
 
 function handleDisconnect() {
 	let i = activeSession.indexOf(gameSocket);
 	activeSession.splice(i, 1);
 }
+
 function handleCreateSession(gameId) {
 // emit room id and socket id back to client
 	this.emit('createNewGame', {gameId: gameId, mySocketId: this.id});
 	this.join(gameId);
 }
+
 function handleJoinGame(idData) {
 	let playerSocket = this
 	let room = io.sockets.adapter.rooms[idData.gameId]
@@ -36,13 +41,27 @@ function handleJoinGame(idData) {
 		playerSocket.join(idData.gameId)
 	
 
-		// if(room.length === 2) {
-		// 	io.sockets.in(idData.gameId).emit('start game', idData.userName)
-		// }
-		// io.sockets.in(idData.gameId).emit('playerJoinedRoom', idData)
+		if(room.length === 2) {
+			io.sockets.in(idData.gameId).emit('start game', idData.userName)
+		}
+		io.sockets.in(idData.gameId).emit('playerJoinedRoom', idData)
 	} else {
 		this.emit('status', 'there are already 2 players.')
 	}
+}
+
+function handleMove(move){
+	const gameId = move.gameId
+	io.to(gameId).emit('opponent move', move)
+}
+
+function handleRequest(gameId){
+	io.to(gameId).emit('give username', this.id)
+}
+
+function handleReceived(data){
+	data.socketId = this.id
+	io.to(data.gameId).emit('get Opponent UserName', data)
 }
 
 exports.initGame = initGame;
