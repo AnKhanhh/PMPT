@@ -11,7 +11,7 @@ import Onboard from "./board/onboard";
 import { ColorContext } from "./context/colorcontext";
 import JoinRoom from "./board/joinroom";
 import JoinGame from "./board/joingame";
-import ChessGame from ".ui/chessgame";
+import ChessGame from "./chess/ui/chessgame";
 
 function App() {
     const [didRedirect, setDidredirect] = React.useState(false);

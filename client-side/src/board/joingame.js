@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from 'react-router-dom'
 
-const socket = require('../connection.socket').socket
+const socket = require('../connection/socket').socket
 
 const JoinRoom = (id, username, creator) => {
 	const idData = {

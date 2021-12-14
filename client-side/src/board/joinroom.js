@@ -1,6 +1,6 @@
 import React from "react";
 import JoinGame from "./joingame";
-import ChessGame from "../ui/chessgame";
+import ChessGame from "../chess/ui/chessgame";
 
 class JoinRoom extends React.Component {
     state = {
