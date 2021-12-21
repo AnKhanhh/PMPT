@@ -30,8 +30,8 @@ function App() {
         <ColorContext.Provider
             value={{
                 didRedirect: didRedirect,
-                playerDidNotRedirect: playerDidNotRedirect,
                 playerDidRedirect: playerDidRedirect,
+                playerDidNotRedirect: playerDidNotRedirect,
             }}
         >
             <Router>

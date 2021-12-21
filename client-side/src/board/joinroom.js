@@ -5,7 +5,7 @@ import ChessGame from "../chess/ui/chessgame";
 class JoinRoom extends React.Component {
     state = {
         gotUserName: false,
-        input: "",
+        inputText: "",
     };
 
     constructor(props) {
@@ -14,8 +14,9 @@ class JoinRoom extends React.Component {
     }
 
     typingUserName = () => {
+		const typed = this.textArea.current.value
         this.setState({
-            input: this.textArea.current.value,
+            inputText: typed
         });
     };
 
@@ -23,13 +24,13 @@ class JoinRoom extends React.Component {
         return (
             <>
                 {this.state.gotUserName ? (
-                    <div>
+                    <>
                         <JoinGame
-                            userName={this.state.input}
+                            userName={this.state.inputText}
                             isCreator={false}
                         />
-                        <ChessGame myUserName={this.state.input} />
-                    </div>
+                        <ChessGame myUserName={this.state.inputText} />
+                    </>
                 ) : (
                     <div>
                         <h1>Your Name:</h1>
@@ -38,7 +39,7 @@ class JoinRoom extends React.Component {
                             onInput={this.typingUserName}
                         ></input>
                         <button
-                            disabled={!(this.state.input.length > 0)}
+                            disabled={!(this.state.inputText.length > 0)}
                             onClick={() => {
                                 this.setState({ gotUserName: true });
                             }}
