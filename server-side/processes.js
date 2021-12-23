@@ -1,67 +1,75 @@
 var io;
 var gameSocket;
-// store all active socket connections in an array
+
 var activeSession = [];
 
 const initGame = (sio, socket) => {
-	io = sio;
-	gameSocket = socket;
-	activeSession.push(gameSocket);
-	gameSocket.on('disconnect', handleDisconnect);
-	gameSocket.on('createNewGame', handleCreateSession);
-	gameSocket.on('playerJoinGame', handleJoinGame)
-	gameSocket.on('new move', handleMove)
-	gameSocket.on('request username', handleRequest)
-	gameSocket.on('received username', handleReceived)
-}
+    /**
+     * initializeGame sets up all the event handlers.
+     */
 
-function handleDisconnect() {
-	let i = activeSession.indexOf(gameSocket);
-	activeSession.splice(i, 1);
+    io = sio;
+    gameSocket = socket;
+    activeSession.push(gameSocket);
+
+    gameSocket.on("disconnect", handleDisconnect);
+    gameSocket.on("new move", handleMove);
+    gameSocket.on("createNewGame", handleCreateSession);
+    gameSocket.on("playerJoinGame", handleJoinsGame);
+    gameSocket.on("request username", handleRequest);
+    gameSocket.on("recieved userName", handleReceived);
+};
+
+function handleJoinsGame(idData) {
+    var sock = this;
+
+    var room = io.sockets.adapter.rooms[idData.gameId];
+
+    if (room === undefined) {
+        this.emit("status", "This game session does not exist.");
+        return;
+    }
+    if (room.length < 2) {
+        idData.mySocketId = sock.id;
+
+        sock.join(idData.gameId);
+
+        console.log(room.length);
+
+        if (room.length === 2) {
+            io.sockets.in(idData.gameId).emit("start game", idData.userName);
+        }
+
+        io.sockets.in(idData.gameId).emit("playerJoinedRoom", idData);
+    } else {
+        this.emit("status", "There are already 2 players.");
+    }
 }
 
 function handleCreateSession(gameId) {
-// emit room id and socket id back to client
-	this.emit('createNewGame', {gameId: gameId, mySocketId: this.id});
-	this.join(gameId);
+    this.emit("createNewGame", { gameId: gameId, mySocketId: this.id });
+
+    this.join(gameId);
 }
 
-function handleJoinGame(idData) {
-	let playerSocket = this
-	let room = io.sockets.adapter.rooms[idData.gameId]
+function handleMove(move) {
+    const gameId = move.gameId;
 
-	// catch exception room dont exist
-	if(room === undefined) {
-		this.emit('status', 'game room not exist')
-		return
-	}
-	//  catch exception already have 2 client
-	if(room.length < 2) {
-		idData.mySocketId = playerSocket.id
-		playerSocket.join(idData.gameId)
-	
-
-		if(room.length === 2) {
-			io.sockets.in(idData.gameId).emit('start game', idData.userName)
-		}
-		io.sockets.in(idData.gameId).emit('playerJoinedRoom', idData)
-	} else {
-		this.emit('status', 'there are already 2 players.')
-	}
+    io.to(gameId).emit("opponent move", move);
 }
 
-function handleMove(move){
-	const gameId = move.gameId
-	io.to(gameId).emit('opponent move', move)
+function handleDisconnect() {
+    var i = activeSession.indexOf(gameSocket);
+    activeSession.splice(i, 1);
 }
 
-function handleRequest(gameId){
-	io.to(gameId).emit('give username', this.id)
+function handleRequest(gameId) {
+    io.to(gameId).emit("give userName", this.id);
 }
 
-function handleReceived(data){
-	data.socketId = this.id
-	io.to(data.gameId).emit('get Opponent UserName', data)
+function handleReceived(data) {
+    data.socketId = this.id;
+    io.to(data.gameId).emit("get Opponent UserName", data);
 }
 
 exports.initGame = initGame;
