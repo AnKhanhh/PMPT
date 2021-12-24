@@ -1,23 +1,25 @@
-import React from 'react';
-import {useParams} from 'react-router-dom'
+import React from "react";
+import { useParams } from "react-router-dom";
 
-const socket = require('../connection/socket').socket
+const socket = require("../connection/socket").socket;
 
-const JoinRoom = (id, username, creator) => {
-	const idData = {
-		gameId: id,
-		userName: username,
-		isCreator: creator
-	}
-	socket.emit("playerJoinGame", idData)
-}
+const JoinGameRoom = (gameid, userName, isCreator) => {
+    const idData = {
+        gameId: gameid,
+        userName: userName,
+        isCreator: isCreator,
+    };
+    socket.emit("playerJoinGame", idData);
+};
 
 const JoinGame = (props) => {
-	const {id} = useParams()
-	JoinRoom(id, props.username, props.creator)
-	return <>
-			<h1>Chess initialezed sucessfully</h1>
-		</>
-}
+    const { gameid } = useParams();
+    JoinGameRoom(gameid, props.userName, props.isCreator);
+    return (
+        <>
+            <h1>Chess initialezed sucessfully</h1>
+        </>
+    );
+};
 
-export default JoinGame
+export default JoinGame;

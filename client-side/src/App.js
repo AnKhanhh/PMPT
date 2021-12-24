@@ -14,14 +14,14 @@ import JoinGame from "./board/joingame";
 import ChessGame from "./chess/ui/chessgame";
 
 function App() {
-    const [didRedirect, setDidredirect] = React.useState(false);
+    const [didRedirect, setDidRedirect] = React.useState(false);
 
     const playerDidRedirect = React.useCallback(() => {
-        setDidredirect(true);
+        setDidRedirect(true);
     }, []);
 
     const playerDidNotRedirect = React.useCallback(() => {
-        setDidredirect(false);
+        setDidRedirect(false);
     }, []);
 
     const [userName, setUserName] = React.useState("");
