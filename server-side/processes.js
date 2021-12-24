@@ -17,7 +17,7 @@ const initGame = (sio, socket) => {
     gameSocket.on("createNewGame", handleCreateSession);
     gameSocket.on("playerJoinGame", handleJoinsGame);
     gameSocket.on("request username", handleRequest);
-    gameSocket.on("recieved userName", handleReceived);
+    gameSocket.on("received userName", handleReceived);
 };
 
 function handleJoinsGame(idData) {
