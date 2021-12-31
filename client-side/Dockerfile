@@ -1,6 +1,7 @@
 FROM node:alpine3.12
 
-WORKDIR /Users/admin/Desktop/Github/PMPT/client-side
+RUN mkdir -p app
+WORKDIR /app
 
 COPY package.json ./
 COPY package-lock.json ./

@@ -11,5 +11,7 @@ io.on("connection", (client) => {
     gameLogic.initGame(io, client);
 });
 
-server.listen(process.env.PORT || 3000);
-console.log("listening on " + (process.env.PORT || 3000));
+server.listen(process.env.PORT || 8000);
+// app.get('/', (req, res) => {
+// 	res.send('Hi There')
+//   });
