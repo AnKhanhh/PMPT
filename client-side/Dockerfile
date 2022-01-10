@@ -1,14 +1,13 @@
-FROM node:alpine3.12
+FROM node:17-alpine
 
-RUN mkdir -p app
-WORKDIR /app
+WORKDIR /client
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json /client/
+COPY package-lock.json /client/
 RUN npm install
 RUN npm install react-scripts
 
-COPY . .
+COPY . /client/
 
 EXPOSE 3000
 
