@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  
+  server:
+    container_name: api
+    restart: always
+    build: ./server-side
+    # volumes:
+    #   - /app/node_modules
+    #   - ./server-side:/app
+    ports:
+      - "8000:8000"
+    command: npm start
+
+  client:
+    container_name: ui
+    # restart: always
+    build: ./client-side
+    # network_mode: host
+    # volumes:
+    #   - /app/node_modules
+    #   - ./client-side:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    stdin_open: true
+    command: npm start
