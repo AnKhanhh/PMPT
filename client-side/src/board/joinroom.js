@@ -33,13 +33,33 @@ class JoinRoom extends React.Component {
                     </>
                 ) : (
                     <div>
-                        <h1>Your Name:</h1>
+                        <h1
+                            style={{
+                                textAlign: "center",
+                                marginTop:
+                                    String(window.innerHeight / 3) + "px",
+                            }}
+                        >
+                            Please Enter Your Name:
+                        </h1>
                         <input
+                            style={{
+                                marginLeft:
+                                    String(window.innerWidth / 2 - 120) + "px",
+                                width: "240px",
+                                marginTop: "62px",
+                            }}
                             ref={this.textArea}
                             onInput={this.typingUserName}
                         ></input>
                         <button
-                            className="btn btn-primary"
+                            style={{
+                                marginLeft:
+                                    String(window.innerWidth / 2 - 60) + "px",
+                                width: "120px",
+                                marginTop: "62px",
+                            }}
+                            className="btn btn-primary"	
                             disabled={!(this.state.inputText.length > 0)}
                             onClick={() => {
                                 this.setState({ didGetUserName: true });
