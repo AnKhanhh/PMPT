@@ -17,7 +17,7 @@ const JoinGame = (props) => {
     JoinGameRoom(gameid, props.userName, props.isCreator);
     return (
         <>
-            <h1>Chess initialezed sucessfully</h1>
+            {/* <h1>Chess initialezed sucessfully</h1> */}
         </>
     );
 };

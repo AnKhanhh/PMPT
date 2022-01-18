@@ -44,8 +44,8 @@ class JoinRoom extends React.Component {
                         </h1>
                         <input
                             style={{
-                                marginLeft:
-                                    String(window.innerWidth / 2 - 120) + "px",
+								display: "block",
+                                margin: "auto",
                                 width: "240px",
                                 marginTop: "62px",
                             }}
@@ -54,10 +54,10 @@ class JoinRoom extends React.Component {
                         ></input>
                         <button
                             style={{
-                                marginLeft:
-                                    String(window.innerWidth / 2 - 60) + "px",
+								display: "block",
+                                margin: "auto",
                                 width: "120px",
-                                marginTop: "62px",
+                                marginTop: "32px",
                             }}
                             className="btn btn-primary"	
                             disabled={!(this.state.inputText.length > 0)}

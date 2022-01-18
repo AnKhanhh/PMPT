@@ -39,8 +39,8 @@ class CreateNewGame extends React.Component {
                     <Redirect to={"/game/" + this.state.gameId}>
                         <button
                             style={{
-                                marginLeft:
-                                    String(window.innerWidth / 2 - 60) + "px",
+								display: "block",
+                                margin: "auto",
                                 width: "120px",
                             }}
                             className="btn btn-success"
@@ -57,12 +57,13 @@ class CreateNewGame extends React.Component {
                                     String(window.innerHeight / 3) + "px",
                             }}
                         >
+							Welcome to online chessgame!<br/>
                             Please Enter Your Name:
                         </h1>
                         <input
                             style={{
-                                marginLeft:
-                                    String(window.innerWidth / 2 - 120) + "px",
+								display: "block",
+                                margin: "auto",
                                 width: "240px",
                                 marginTop: "62px",
                             }}
@@ -71,10 +72,10 @@ class CreateNewGame extends React.Component {
                         ></input>
                         <button
                             style={{
-                                marginLeft:
-                                    String(window.innerWidth / 2 - 60) + "px",
+								display: "block",
+								margin: "auto",
                                 width: "120px",
-                                marginTop: "62px",
+                                marginTop: "32px",
                             }}
                             className="btn btn-primary"
                             // when press submit, send request to server with uuid generated as room id

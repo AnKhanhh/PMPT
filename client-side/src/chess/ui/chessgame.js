@@ -304,16 +304,19 @@ const ChessGameWrapper = (props) => {
     return (
       <React.Fragment>
         {opponentDidJoinTheGame ? (
-          <div>
-            <h4> Opponent: {opponentUserName} </h4>
-            <div style={{ display: "flex" }}>
+          <div style={{
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center'}}>
+            <h4 style={{ marginRight: "32px"}}> Opponent: {opponentUserName} </h4>
+            <div style={{display: "flex" }}>
               <ChessGame
                 playAudio={play}
                 gameId={gameid}
                 color={color.didRedirect}
               />
             </div>
-            <h4> You: {props.myUserName} </h4>
+            <h4 style={{marginLeft: "32px"}}> You: {props.myUserName} </h4>
           </div>
         ) : gameSessionDoesNotExist ? (
           <div>
